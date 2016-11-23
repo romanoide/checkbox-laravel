@@ -17,12 +17,27 @@ class ResultadosController extends Controller
     //$separation = implode("  |  ", $cate);
     //echo $separation;
 
-    $ce = DB::table('categorias_ejemplo') -> whereIn('id_categorias', $cate)->get();
-    print_r($ce);
+    // $ce = DB::table('categorias_ejemplo') -> whereIn('id_categorias', $cate)->get();
+    // print_r($ce);
+    $ce = $cate[0] * 5;//Esta deberia ser informacion de su base de datos
+
+    $xres="<div>el resultado de ";
+    $buf=0;
+    for($x=0;$x<count($cate);$x++)
+    {
+        $xres.="(".$cate[$x]." x 5) ";
+        if($x!=count($cate)-1){
+           $xres.=" + "; 
+        }
+        $buf += ($cate[$x]*5);
+    }
+    $xres.=" = <i>".$buf."</i></div>";
+
+    //.$cate[0]." x 5 = <i>".$ce."</i><div>";
 
     //$separation = implode("  |  ", $ce);
     //echo $separation;
 
-    return \View::make('resultadosbusqueda')->with('#results',$ce);
+    return $xres;
 	}
 }

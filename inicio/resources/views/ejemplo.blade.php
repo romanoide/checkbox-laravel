@@ -26,9 +26,12 @@
             })
         </script>
 
-        <script type="text/javascript">$(document).ready(function () {
-            var categorias = [];
+        <script type="text/javascript">
+
+        $(document).ready(function () {
+        var categorias = [];
         $('input[name="cat[]"]').on('change', function (e) {
+            console.log("changed")
 
         e.preventDefault();
         categorias = []; // reset 
@@ -40,7 +43,7 @@
         //alert( "Data Loaded: " + categorias );
         $.post('resultadosbusqueda', {categorias: categorias}, function(ejemplo)
         {
-            $('#results').html(ejemplo);
+            $('#results').html(ejemplo);//no olviden que abajo deben tener un elemento con el ID results para que puedda cargar esta info
         });
     });
 
@@ -51,6 +54,7 @@
 <center><h1>Demostracion</h1></center>
     <form method="get">
     <br>
+    El servidor multiplicara el valor de cada categoria
     <div class="checkbox checkbox-danger">
         <input type="checkbox" name="cat[]" id="cat1" value="1">
         <label for="cat1" class='cat-check'>Valor 1 Categoria</label>
@@ -64,7 +68,8 @@
         <label for="cat3" class='cat-check'>Valor 3 Categoria</label>
     </div>
     <br>
-    </form>   
+    </form>  
+    <div id="results" class="habian olvidado este elemento lol"></div>  
 </div>
     @yield('content')
     <!-- Scripts -->
